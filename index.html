@@ -182,4 +182,12 @@
  $('print').addEventListener('click',()=>{if(last)window.print()});$('csv').addEventListener('click',()=>{if(!last)return;let r=last.result,fields=['patient','schedule','lab_day','spKtV_SoluteSolver_modeled','spKtV_Daugirdas_GFAC','GFAC','PIDI_days','eqKtV_SoluteSolver_two_pool','stdKtV_total','stdKtV_dialysis_only','SAN_stdKtV_total','URR_percent','TAC_urea_mg_dL','EKRU_mL_min','nPCR_g_kg_day','KRU_calc_mL_min','urine_collection_minutes','V2PL'];let values=[last.input.patient,last.input.s,last.input.day,r['spKT/V'],last.kdoqi,last.gfac.value,last.gfac.pidi,r['eqKt/V'],r.stdKtV,r.DstdKtV,r.SAN_stdKtV,100*(1-last.input.post/last.input.pre),r.TAC_wb,r.EKRUave,r.PCRN_2P,last.input.urine?r.KRU_calc:last.input.data[14],last.input.urine?last.input.span.minutes:'',r.V2PL];const esc=s=>'"'+String(s??'').replace(/"/g,'""')+'"';let blob=new Blob([fields.map(esc).join(',')+'\r\n'+values.map(esc).join(',')+'\r\n'],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='dialysis-adequacy-report.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)});
 })();
 </script>
+
+<!-- GoatCounter Analytics -->
+<script
+  data-goatcounter="https://pattharawin.goatcounter.com/count"
+  async
+  src="https://gc.zgo.at/count.js">
+</script>
+
 </body></html>
